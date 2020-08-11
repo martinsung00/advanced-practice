@@ -104,7 +104,7 @@ function ex6(n) {
   else return n * ex6(n - 1);
 }
 /*
-  Runtime: O(n^n + 3)
+  Runtime: O(n^n + 1)
   Decomposed runtime: O(n^n), in this scenario we must keep in mind recursion uses it's own runtime.
   Additionally we see multiple if statements, which can be considered an operation in itself. Since
   there is an n amount of iterations, depending on the input we can safely assume its O(n). However,
@@ -122,7 +122,7 @@ function ex7(n) {
   return ex7(n - 1) + ex7(n - 2);
 }
 /*
-  Runtime: O(n^2n + 3)
+  Runtime: O(n^2n + 2)
   Decomposed runtime: O(n^2n), similar to the example above, this f(n) uses recursion and has if/else statments.
   But to add on top of that, the f(n) calls itself twice in it's return statement until n reaches 0 or below 0.
   Hence O(n^2n)
