@@ -14,21 +14,24 @@ function hasPalindromePermutation(str) {
 
   const storage = {};
   let uniqueCount = 0;
-  let tempStr = str.toLowerCase();
+  let charCount = 0;
+  const tempStr = str.toLowerCase();
 
   for (let i = 0; i < tempStr.length; i++) {
     let currentStr = tempStr[i];
 
     if (!storage[currentStr] && currentStr !== ' ' && currentStr !== ',') {
       storage[currentStr] = 1;
+      charCount++;
       uniqueCount++;
     } else if (storage[currentStr] && currentStr !== ' ' && currentStr !== ',') {
       storage[currentStr] + 1;
+      charCount++;
       uniqueCount--;
     }
   }
 
-  if (uniqueCount === 1) {
+  if (uniqueCount === 1 && charCount % 3 === 0) {
     return true;
   } else {
     return false;

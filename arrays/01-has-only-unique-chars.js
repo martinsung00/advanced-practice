@@ -9,7 +9,7 @@
 */
 
 function hasOnlyUniqueCharacters(str) {
-// Create a storage to store unique characters. If the letter is in the storage already, and the letter appears again, return false
+// Create a storage to store unique characters. If the letter is in the storage already, and the letter appears again, the string does not contain only unique characters
   const storage = {};
   const isUnique = true;
 
