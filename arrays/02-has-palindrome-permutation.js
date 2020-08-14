@@ -18,11 +18,14 @@ export function hasPalindromePermutation(str) {
   let charCount = 0;
   let pairCount = 0;
 
+  if(typeof str !== 'string') {
+    throw ('Input is not a string')
+  }
   for (let i = 0; i < tempStr.length; i++) {
     let currentStr = tempStr[i];
 
     if (!storage[currentStr] && currentStr !== ' ' && currentStr !== ',') {
-      storage[currentStr] = 1;
+      storage[currentStr] = currentStr;
       charCount++;
       uniqueCount++;
     } else if (storage[currentStr] && currentStr !== ' ' && currentStr !== ',') {
@@ -39,13 +42,13 @@ export function hasPalindromePermutation(str) {
   1) There is two unique characters everything else is paired
   2) The number of pairs is half the string length
   */
-  if (charCount % 3 === 0) {
-    return (uniqueCount === 1 && pairCount > 0) ? true : false;
+  if (charCount & 1) {
+    return ((uniqueCount === 1 || uniqueCount < 0) && pairCount > 0) ? true : false;
   } else {
     let halfOfStr = charCount / 2;
 
-    return ((uniqueCount === 2 && pairCount > 0) || (halfOfStr === pairCount)) ? true : false;
+    return ((uniqueCount === 2 && pairCount > 0) || (halfOfStr === pairCount && uniqueCount !== 0)) ? true : false;
   }
 };
 
-// Runtime: O(n) || linear time
+// Runtime: O(2n)
