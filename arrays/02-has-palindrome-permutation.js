@@ -10,8 +10,6 @@
 
 export function hasPalindromePermutation(str) {
   /*
-  In palindrome there should be only one unique character
-  or every letter has a pair
   Edge cases include strings with spaces, commas and captilization
   */
   const storage = {};
