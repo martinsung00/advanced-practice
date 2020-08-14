@@ -8,14 +8,17 @@
   Output: false
 */
 
-function hasPalindromePermutation(str) {
-  // In palindrome there should be only one unique character
-  // Edge cases include strings with spaces, commas and captilization
-
+export function hasPalindromePermutation(str) {
+  /*
+  In palindrome there should be only one unique character
+  or every letter has a pair
+  Edge cases include strings with spaces, commas and captilization
+  */
   const storage = {};
+  const tempStr = str.toLowerCase();
   let uniqueCount = 0;
   let charCount = 0;
-  const tempStr = str.toLowerCase();
+  let pairCount = 0;
 
   for (let i = 0; i < tempStr.length; i++) {
     let currentStr = tempStr[i];
@@ -25,15 +28,26 @@ function hasPalindromePermutation(str) {
       charCount++;
       uniqueCount++;
     } else if (storage[currentStr] && currentStr !== ' ' && currentStr !== ',') {
-      storage[currentStr] + 1;
+      pairCount++;
       charCount++;
       uniqueCount--;
     }
   }
+  /*
+  If string length is odd there should only be one unique character
+  and everything else is paired
 
-  if (uniqueCount === 1 && charCount % 3 === 0) {
-    return true;
+  If string length is even, two cases can happen:
+  1) There is two unique characters everything else is paired
+  2) The number of pairs is half the string length
+  */
+  if (charCount % 3 === 0) {
+    return (uniqueCount === 1 && pairCount > 0) ? true : false;
   } else {
-    return false;
+    let halfOfStr = charCount / 2;
+
+    return ((uniqueCount === 2 && pairCount > 0) || (halfOfStr === pairCount)) ? true : false;
   }
 };
+
+// Runtime: O(n) || linear time
