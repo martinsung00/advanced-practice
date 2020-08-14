@@ -18,7 +18,7 @@ export function isRotation(str1, str2) {
   const lowerCaseTwo = str2.toString().toLowerCase();
 
   if (typeof str1 !== string || typeof str2 !== string) {
-    throw ('One or more inputs are not strings')
+    throw ('One or more input is not strings')
   }
   for (let i = lowerCaseOne.length - 1; i >= 0; i--) {
     storage.push(lowerCaseOne[i]);
