@@ -18,8 +18,8 @@ export function hasPalindromePermutation(str) {
   let charCount = 0;
   let pairCount = 0;
 
-  if(typeof str !== 'string') {
-    throw ('Input is not a string')
+  if(tempStr.length === 1) {
+    return true;
   }
   for (let i = 0; i < tempStr.length; i++) {
     let currentStr = tempStr[i];
@@ -33,7 +33,10 @@ export function hasPalindromePermutation(str) {
       charCount++;
       uniqueCount--;
     }
+    console.log('uniqCount: ', uniqueCount);
   }
+  console.log('charCount: ', charCount);
+  console.log('pairCount: ', pairCount);
   /*
   If string length is odd there should only be one unique character
   and everything else is paired
@@ -47,7 +50,7 @@ export function hasPalindromePermutation(str) {
   } else {
     let halfOfStr = charCount / 2;
 
-    return ((uniqueCount === 2 && pairCount > 0) || (halfOfStr === pairCount && uniqueCount !== 0)) ? true : false;
+    return ((uniqueCount === 2 && pairCount > 0) || (halfOfStr === pairCount && uniqueCount !== 0) || (uniqueCount < 0 && pairCount / charCount === 0.75)) ? true : false;
   }
 };
 
