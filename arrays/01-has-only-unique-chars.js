@@ -29,4 +29,4 @@ export function hasOnlyUniqueCharacters(str) {
   return isUnique;
 };
 
-// Runtime: O(n) || linear time
+// Runtime: O(n)
