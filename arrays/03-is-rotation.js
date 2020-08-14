@@ -27,3 +27,5 @@ export function isRotation(str1, str2) {
 
   return (reversedStr === lowerCaseTwo) ? true : false;
 };
+
+// Runtime O(2n)
