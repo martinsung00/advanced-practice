@@ -24,7 +24,7 @@ export function hasPalindromePermutation(str) {
       storage.add(currentLetter);
     }
   }
-  return (storage.size <= 1) ? true : false;
+  return (storage.size === 1 || storage.size === 0) ? true : false;
 };
 
 // Runtime: O(n)
