@@ -20,7 +20,7 @@ export function hasPalindromePermutation(str) {
 
     if (storage.has(currentLetter)) {
       storage.delete(currentLetter);
-    } else if (!storage.has(currentLetter)) {
+    } else {
       storage.add(currentLetter);
     }
   }
