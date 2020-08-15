@@ -14,19 +14,18 @@ export function hasOnlyUniqueCharacters(str) {
   If the letter is in the storage already and the letter appears again,
   the string is not composed of only unique characters
   */
-  const storage = {};
-  const isUnique = true;
+  const uniqueChar = new Set();
 
   for (let i = 0; i < str.length; i++) {
     let currentLetter = str[i].toString();
 
-    if (!storage[currentLetter]) {
-      storage[currentLetter] = 1;
-    } else {
+    if (uniqueChar.has(currentLetter)) {
       return false;
+    } else {
+      uniqueChar.add(currentLetter);
     }
   }
-  return isUnique;
+  return true;
 };
 
 // Runtime: O(n)

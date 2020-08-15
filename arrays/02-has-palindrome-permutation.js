@@ -10,48 +10,31 @@
 
 export function hasPalindromePermutation(str) {
   /*
-  Edge cases include strings with spaces, commas and captilization
+  Edge cases: strings with spaces
+  If string is of even length, every character should be paired, storage should be empty
+  If string is of odd length there should be only one unique character
   */
-  const storage = {};
-  const tempStr = str.toLowerCase();
-  let uniqueCount = 0;
-  let charCount = 0;
-  let pairCount = 0;
+  const storage = new Set();
+  let strCount = 0;
 
-  if(tempStr.length === 1) {
-    return true;
-  }
-  for (let i = 0; i < tempStr.length; i++) {
-    let currentStr = tempStr[i];
+  for (let i = 0; i < str.length; i++) {
+    let currentLetter = str[i];
 
-    if (!storage[currentStr] && currentStr !== ' ' && currentStr !== ',') {
-      storage[currentStr] = currentStr;
-      charCount++;
-      uniqueCount++;
-    } else if (storage[currentStr] && currentStr !== ' ' && currentStr !== ',') {
-      pairCount++;
-      charCount++;
-      uniqueCount--;
+    if (storage.has(currentLetter)) {
+      storage.delete(currentLetter);
+      strCount++;
+    } else if (!storage.has(currentLetter) && currentLetter !== ' ') {
+      storage.add(currentLetter);
+      strCount++;
     }
-    console.log('uniqCount: ', uniqueCount);
+    console.log(storage);
   }
-  console.log('charCount: ', charCount);
-  console.log('pairCount: ', pairCount);
-  /*
-  If string length is odd there should only be one unique character
-  and everything else is paired
 
-  If string length is even, two cases can happen:
-  1) There is two unique characters everything else is paired
-  2) The number of pairs is half the string length
-  */
-  if (charCount & 1) {
-    return ((uniqueCount === 1 || uniqueCount < 0) && pairCount > 0) ? true : false;
+  if (strCount & 1) {
+    return (storage.size === 1) ? true : false;
   } else {
-    let halfOfStr = charCount / 2;
-
-    return ((uniqueCount === 2 && pairCount > 0) || (halfOfStr === pairCount && uniqueCount !== 0) || (uniqueCount < 0 && pairCount / charCount === 0.75)) ? true : false;
+    return (storage.size === 0) ? true : false;
   }
 };
 
-// Runtime: O(2n)
+// Runtime: O(n)
