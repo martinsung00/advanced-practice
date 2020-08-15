@@ -27,7 +27,6 @@ export function hasPalindromePermutation(str) {
       storage.add(currentLetter);
       strCount++;
     }
-    console.log(storage);
   }
 
   if (strCount & 1) {
