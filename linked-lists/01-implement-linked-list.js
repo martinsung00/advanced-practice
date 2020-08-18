@@ -40,6 +40,7 @@ class Node {
   constructor(data) {
     this.data = data;
     this.next = null;
+    this.prev = null;
   }
 };
 
@@ -47,27 +48,90 @@ export default class LinkedList {
   constructor() {
     this.head = null;
     this.tail = null;
+    this.storage = {};
+    this.size = 0;
+  };
+
+  appendToHead(data) {
+    // Appends a node contaiing data to the front.
+    const newNode = new Node(data);
+    let currentHead = this.head;
+    newNode.next = null;
+    newNode.prev = null;
+
+    if (currentHead === null) {
+      currentHead = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = currentHead;
+      currentHead.prev = newNode;
+    }
+    this.increase();
   };
 
   appendToTail(data) {
     // Appends a node containing data to the end.
-    let newNode = new Node(data);
+    const newNode = new Node(data);
+    let currentTail = this.tail;
     newNode.next = null;
+    newNode.prev = currentTail;
 
     if (this.head === null) {
       this.head = newNode;
-      this.tail = newNode;
+      currentTail = newNode;
+      newNode.prev = null;
     } else {
-      this.tail.next = newNode;
+      currentTail.next = newNode;
+      currentTail = newNode;
     }
-    return newTail.data;
+    this.increase();
   };
 
-  deleteNode(val) {
-    // Removes the first occurence of data.
-    let currentNode
-    if (this.head.next === null) {
+  removeFromHead() {
+    this.head = this.head.next;
+    this.decrease();
+  };
 
+  removeFromTail() {
+    this.tail = this.tail.prev;
+    this.decrease();
+  }
+
+  deleteNode(data) {
+    // Removes the first occurence of data.
+    let currentNode = this.head;
+
+    while (currentNode.next !== null) {
+      if (currentNode.data === data) {
+        currentNode.prev.next = currentNode.next;
+        this.decrease();
+        break;
+      }
     }
+  };
+
+  size() {
+    return this.size;
+  };
+
+  has(data) {
+    const listStorage = this.storage;
+    return (listStorage[data]) ? true : false;
+  };
+
+  increase() {
+    // Used as a helper function when adding new nodes.
+    const listStorage = this.storage;
+
+    (!listStorage[data]) ? listStorage[data] = 1 : listStorage[data]++;
+    return this.size++;
+  };
+
+  decrease() {
+    // Used as a helper function when deleting nodes.
+    const listStorage = this.storage;
+
+    (listStorage[data] > 1) ? listStorage[data]-- : delete listStorage[data];
+    return this.size--;
   };
 };
