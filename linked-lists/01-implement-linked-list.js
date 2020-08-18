@@ -53,7 +53,7 @@ export default class LinkedList {
   };
 
   appendToHead(data) {
-    // Appends a node contaiing data to the front.
+    // Appends a node contaiing data to the front. Constant time.
     const newNode = new Node(data);
     let currentHead = this.head;
     newNode.next = null;
@@ -70,7 +70,7 @@ export default class LinkedList {
   };
 
   appendToTail(data) {
-    // Appends a node containing data to the end.
+    // Appends a node containing data to the end. Constant time.
     const newNode = new Node(data);
     let currentTail = this.tail;
     newNode.next = null;
@@ -88,17 +88,20 @@ export default class LinkedList {
   };
 
   removeFromHead() {
+    // Removes node from head. Constant time.
     this.head = this.head.next;
     this.decrease();
   };
 
   removeFromTail() {
+    // Removes node from tail. Constant time.
     this.tail = this.tail.prev;
     this.decrease();
-  }
+  };
 
   deleteNode(data) {
-    // Removes the first occurence of data.
+    // Removes the first occurence of data. Linear time.
+    // Unlike removing form head or tail, this method must search the entire linked list for the data.
     let currentNode = this.head;
 
     while (currentNode.next !== null) {
@@ -111,12 +114,26 @@ export default class LinkedList {
   };
 
   size() {
+    // Returns size. Constant time.
     return this.size;
   };
 
   has(data) {
+    // Checks if linked list contains an item. Constant time.
     const listStorage = this.storage;
     return (listStorage[data]) ? true : false;
+  };
+
+  tail() {
+    // Returns the tail data. Constant time.
+    return this.tail.data;
+  };
+
+  secondToLast() {
+    // Returns second to last item of linked list. Constant time.
+    const prevTail = this.tail.prev;
+
+    return (this.size !== 0 || this.size !== 1) ? prevTail.data : null;
   };
 
   increase() {
