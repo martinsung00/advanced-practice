@@ -19,13 +19,11 @@ export function reverseString(str) {
     const maxIndex = str.length -1;
     let decrementIndex = maxIndex;
     let oldChar;
-    let newString;
 
     if (i === 0) {
       oldChar = str[maxIndex];
-      str[maxIndex] = str[0];
-      str[i] = oldChar
-      currentStr + maxIndex;
+      str.substr(0, str.length - 1) + str[0] + str.substr(i, 0)
+      str.substr(0, i) + oldChar + str.substr(i, char.length)
     } else {
       decrementIndex -= 2;
 
