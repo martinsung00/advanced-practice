@@ -121,6 +121,7 @@ export default class LinkedList {
   has(data) {
     // Checks if linked list contains an item. Constant time.
     const listStorage = this.storage;
+
     return (listStorage[data]) ? true : false;
   };
 
